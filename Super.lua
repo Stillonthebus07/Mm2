@@ -1,30 +1,3 @@
 loadstring(game:HttpGet('https://cdn.sourceb.in/bins/rbGhAqelrt/0'))()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-loadstring(game:HttpGet('https://cdn.sourceb.in/bins/njaSUU3b9t/0'))()
