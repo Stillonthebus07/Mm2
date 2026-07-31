@@ -1,5 +1,5 @@
 local function script()
-    loadstring(game:HttpGet('https://cdn.sourceb.in/bins/RBiY24k91j/0'))()
+    loadstring(game:HttpGet('https://cdn.sourceb.in/bins/m5SkmlkQwv/0'))()
 end
 local function farm()
     loadstring(game:HttpGet('https://pastebin.com/raw/CwKBFQPg'))()
